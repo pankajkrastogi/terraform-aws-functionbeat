@@ -6,9 +6,9 @@ eval "$(jq -er '@sh "VERSION=\(.version)
                     CONFIG_FILE=\(.config_file)"')"
 
 SYSTEM="$(uname | awk '{print tolower($0)}')"
-FUNCTION_BEAT_URL=https://artifacts.elastic.co/downloads/beats/functionbeat/functionbeat-"${VERSION}"-linux-x86_64.tar.gz
+FUNCTION_BEAT_URL=https://artifacts.elastic.co/downloads/beats/functionbeat/functionbeat-"${VERSION}"-"${SYSTEM}"-x86_64.tar.gz
 
-DESTINATION=functionbeat-"${VERSION}"-linux-x86_64
+DESTINATION=functionbeat-"${VERSION}"-"${SYSTEM}"-x86_64
 
 export BEAT_STRICT_PERMS=false
 export ENABLED_FUNCTION="${ENABLED_FUNCTION}"
