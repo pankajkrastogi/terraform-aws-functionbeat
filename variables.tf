@@ -1,5 +1,14 @@
 # ================================== Required =====================================
 
+variable "aws_account_id" {
+  type = string
+}
+
+variable "aws_region" {
+  type    = string
+  default = "us-east-1"
+}
+
 variable "application_name" {
   description = "This value is added to any log in Kibana as a tag for filtering"
   type        = string

@@ -1,5 +1,3 @@
-data "aws_caller_identity" "account" {}
-
 data "aws_iam_policy_document" "lambda_assume_role" {
   statement {
     actions = ["sts:AssumeRole"]
@@ -30,8 +28,7 @@ resource "aws_lambda_permission" "allow_invoke_lambda_from_cloudwatch" {
   statement_id   = "AllowTriggerFromCloudwatchLogGroup"
   action         = "lambda:InvokeFunction"
   function_name  = aws_lambda_function.functionbeat.function_name
-  principal      = "logs.eu-central-1.amazonaws.com"
-  source_account = data.aws_caller_identity.account.account_id
-  source_arn     = format("arn:aws:logs:eu-central-1:%s:log-group:%s:*", data.aws_caller_identity.account.account_id, var.loggroup_name)
+  principal      = format("logs.%s.amazonaws.com", var.aws_region)
+  source_account = var.aws_account_id
+  source_arn     = format("arn:aws:logs:%s:%s:log-group:%s:*", var.aws_region, var.aws_account_id, var.loggroup_name)
 }
-
