@@ -25,6 +25,6 @@ cd "${DESTINATION}"
 ./functionbeat -v -e package --output ./../"${DESTINATION}-release".zip
 
 cd ..
-rm -rf ${DESTINATION}*
+rm -rf "${DESTINATION}"
 
 jq -M -c -n --arg destination "${DESTINATION}-release.zip" '{"filename": $destination}'
