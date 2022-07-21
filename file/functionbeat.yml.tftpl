@@ -25,6 +25,10 @@ ${yamlencode({
 # Configure what output to use when sending the data collected by the beat.
 
 # ---------------------------- Elasticsearch Output ----------------------------
+output.elasticsearch:
+  ilm.enabled: false
+setup.ilm.enabled = false
+
 ${yamlencode({
     output = {
         elasticsearch = output_elasticsearch
@@ -36,8 +40,6 @@ ${yamlencode({
 # Sets log level. The default log level is info.
 # Available log levels are: error, warning, info, debug
 logging.level: "$${LOG_LEVEL:info}"
-
-setup.ilm.enabled = false
 
 # ======================== Terraform generated content =========================
 
