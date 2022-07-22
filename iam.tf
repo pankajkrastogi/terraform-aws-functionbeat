@@ -32,3 +32,25 @@ resource "aws_lambda_permission" "allow_invoke_lambda_from_cloudwatch" {
   source_account = var.aws_account_id
   source_arn     = format("arn:aws:logs:%s:%s:log-group:%s:*", var.aws_region, var.aws_account_id, var.loggroup_name)
 }
+
+resource "aws_iam_role_policy" "es_write_access" {
+  name   = "es_write_access"
+  role   = aws_iam_role.lambda_execution_role.id
+  policy = jsonencode({
+    Version   = "2012-10-17"
+    Statement = [
+      {
+        Sid : "AllowProcessorWriteToES",
+        Effect : "Allow",
+        Action : [
+          "es:ESHttpPut",
+          "es:ESHttpPost"
+        ],
+        Resource : [
+          "arn:aws:es:${var.aws_region}:${var.aws_account_id}:domain/rdp-newsflo-es-dev/*",
+          "arn:aws:es:${var.aws_region}:${var.aws_account_id}:domain/rdp-newsflo-es-dev"
+        ]
+      }
+    ]
+  })
+}
