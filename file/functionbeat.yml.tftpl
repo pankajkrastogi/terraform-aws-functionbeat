@@ -27,7 +27,13 @@ ${yamlencode({
 # ---------------------------- Elasticsearch Output ----------------------------
 output.elasticsearch:
   ilm.enabled: false
+
 setup.ilm.enabled: false
+setup.pack.security.enabled: false
+setup.xpack.graph.enabled: false
+setup.xpack.watcher.enabled: false
+setup.xpack.monitoring.enabled: false
+setup.xpack.reporting.enabled: false
 
 ${yamlencode({
     output = {

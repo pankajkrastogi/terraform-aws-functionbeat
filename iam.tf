@@ -43,8 +43,12 @@ resource "aws_iam_role_policy" "es_write_access" {
         Sid : "AllowProcessorWriteToES",
         Effect : "Allow",
         Action : [
-          "es:ESHttpPut",
-          "es:ESHttpPost"
+          "es:DescribeElasticsearchDomain",
+          "es:DescribeElasticsearchDomains",
+          "es:DescribeElasticsearchDomainConfig",
+          "es:ESHttpPost",
+          "es:ESHttpGet",
+          "es:ESHttpPut"
         ],
         Resource : [
           "arn:aws:es:${var.aws_region}:${var.aws_account_id}:domain/rdp-newsflo-es-dev/*",
